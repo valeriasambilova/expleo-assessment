@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import axios from 'axios';
+import './CoinsList.css';
 
 const { Column, ColumnGroup } = Table;
 
@@ -48,6 +49,7 @@ const CoinsList = () => {
 
   return (
     <Table
+      className='CoinsList-Table'
       rowKey={(record) => record.id}
       dataSource={data}
       pagination={pagination}
