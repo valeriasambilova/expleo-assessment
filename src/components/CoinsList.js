@@ -6,6 +6,9 @@ const { Column, ColumnGroup } = Table;
 
 const CURRENCY = 'eur';
 
+const roundNumberToTwoDecimals = (num) =>
+  Number(Math.round(num + 'e+2') + 'e-2');
+
 const CoinsList = () => {
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -14,6 +17,8 @@ const CoinsList = () => {
     total: 50,
   });
   const [loading, setLoading] = useState(false);
+
+  const renderPrice = (price) => roundNumberToTwoDecimals(parseFloat(price));
   const onTableChange = (pagination, filters, sorter) => {
     setPagination(pagination);
   };
@@ -52,17 +57,33 @@ const CoinsList = () => {
       <Column
         title='Image'
         dataIndex='image'
+        align='center'
         render={(imageSrc, record) => (
           <img src={imageSrc} alt={record.name} width={50}></img>
         )}
       />
       <Column title='Name' dataIndex='name' />
-      <Column title='Symbol' dataIndex='symbol' />
+      <Column title='Symbol' dataIndex='symbol' align='center' />
 
       <ColumnGroup title={`Price (${CURRENCY.toUpperCase()})`}>
-        <Column title='Current' dataIndex='current_price' />
-        <Column title='High 24-hour' dataIndex='high_24h' />
-        <Column title='Low 24-hour' dataIndex='low_24h' />
+        <Column
+          title='Current'
+          dataIndex='current_price'
+          align='right'
+          render={(price) => renderPrice(price)}
+        />
+        <Column
+          title='High 24-hour'
+          dataIndex='high_24h'
+          align='right'
+          render={(price) => renderPrice(price)}
+        />
+        <Column
+          title='Low 24-hour'
+          dataIndex='low_24h'
+          align='right'
+          render={(price) => renderPrice(price)}
+        />
       </ColumnGroup>
     </Table>
   );
