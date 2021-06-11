@@ -5,3 +5,7 @@
 .coins-list {
   overflow: auto;
 }
+
+.coins-list-item {
+  cursor: pointer;
+}

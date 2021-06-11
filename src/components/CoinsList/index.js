@@ -8,7 +8,7 @@ import './style.css';
 const roundNumberToTwoDecimals = (numString) =>
   Number(Math.round(numString + 'e+2') + 'e-2').toFixed(2);
 
-const CoinsList = () => {
+const CoinsList = ({ onRowClick = null }) => {
   const [data, setData] = useState([]);
   const [initialDataLoading, setInitialDataLoading] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,11 @@ const CoinsList = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const renderListItem = (item) => (
-    <List.Item key={item.id}>
+    <List.Item
+      className='coins-list-item'
+      key={item.id}
+      onClick={() => onRowClick(item)}
+    >
       <List.Item.Meta
         avatar={<Avatar src={item.image} alt={item.name} size='large' />}
         title={item.name}
@@ -56,9 +60,7 @@ const CoinsList = () => {
     setLoading(true);
     fetchData(page).then((result) => {
       setData((previousData) => [...previousData, ...result]);
-      if (result.length < 10) {
-        setHasMore(false);
-      }
+      if (result.length < 10) setHasMore(false);
       setLoading(false);
       if (page === 1) setInitialDataLoading(false);
     });
