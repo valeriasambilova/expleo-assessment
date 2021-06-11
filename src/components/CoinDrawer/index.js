@@ -8,7 +8,7 @@ import './style.css';
 const { Item } = Descriptions;
 const { Link } = Typography;
 
-const CoinDrawer = ({ id, visible, toggleVisibility }) => {
+const CoinDrawer = ({ id, toggleVisibility }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -33,16 +33,17 @@ const CoinDrawer = ({ id, visible, toggleVisibility }) => {
 
   const fetchData = async (id) => {
     const res = await coingecko.get(`/coins/${id}`, {
-      params: {
-        localization: false,
-      },
+      params: { localization: false },
     });
 
     return res.data;
   };
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setData(null);
+      return;
+    }
 
     setLoading(true);
     fetchData(id).then((result) => {
@@ -51,13 +52,9 @@ const CoinDrawer = ({ id, visible, toggleVisibility }) => {
     });
   }, [id]);
 
-  useEffect(() => {
-    if (!visible) setData(null);
-  }, [visible]);
-
   return (
     <Drawer
-      visible={visible}
+      visible={!!id}
       onClose={toggleVisibility}
       width={600}
       destroyOnClose={true}

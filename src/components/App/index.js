@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Layout } from 'antd';
 import CoinsList from '../CoinsList';
 import CoinDrawer from '../CoinDrawer';
@@ -8,16 +8,8 @@ const { Header, Content } = Layout;
 
 const App = () => {
   const [openCoinId, setOpenCoinId] = useState(null);
-  const [drawerVisible, setDrawerVisible] = useState(false);
 
-  const onCoinsListRowClick = (item) => {
-    setOpenCoinId(item.id);
-    setDrawerVisible(true);
-  };
-
-  useEffect(() => {
-    if (!drawerVisible) setOpenCoinId(null);
-  }, [drawerVisible]);
+  const onRowClick = (item) => setOpenCoinId(item.id);
 
   return (
     <Layout className='app--height'>
@@ -26,11 +18,10 @@ const App = () => {
       </Header>
       <Content className='app-content--container app--height'>
         <div className='app-content app--background app--height'>
-          <CoinsList onRowClick={onCoinsListRowClick} />
+          <CoinsList onRowClick={onRowClick} />
           <CoinDrawer
             id={openCoinId}
-            visible={drawerVisible}
-            toggleVisibility={() => setDrawerVisible(!drawerVisible)}
+            toggleVisibility={() => setOpenCoinId(null)}
           />
         </div>
       </Content>
