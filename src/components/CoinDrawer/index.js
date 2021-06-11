@@ -1,5 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { Drawer, Card, Avatar, Descriptions, Typography } from 'antd';
+import DOMPurify from 'dompurify';
 
 import coingecko from '../../api/coingecko';
 import './style.css';
@@ -10,6 +11,25 @@ const { Link } = Typography;
 const CoinDrawer = ({ id, visible, toggleVisibility }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const renderDescription = (text) => {
+    if (!text) return '';
+
+    const cleanText = DOMPurify.sanitize(text);
+    const parser = new DOMParser();
+    const textDoc = parser.parseFromString(cleanText, 'text/html');
+    textDoc
+      .querySelectorAll('a')
+      .forEach((item) => item.setAttribute('target', '_blank'));
+
+    return (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: textDoc.body.outerHTML,
+        }}
+      ></div>
+    );
+  };
 
   const fetchData = async (id) => {
     const res = await coingecko.get(`/coins/${id}`, {
@@ -80,7 +100,7 @@ const CoinDrawer = ({ id, visible, toggleVisibility }) => {
             />
             <Descriptions>
               <Item className='card-drawer-description'>
-                {data.description.en}
+                {renderDescription(data.description.en)}
               </Item>
             </Descriptions>
           </>
