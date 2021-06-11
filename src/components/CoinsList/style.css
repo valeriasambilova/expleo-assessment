@@ -6,6 +6,10 @@
   overflow: auto;
 }
 
-.coins-list-item {
+.coins-list--pointer {
   cursor: pointer;
+}
+
+.coins-list-spin {
+  width: 100%;
 }
