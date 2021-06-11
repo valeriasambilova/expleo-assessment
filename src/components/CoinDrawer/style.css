@@ -1,0 +1,8 @@
+.coin-drawer-card .ant-card-meta-avatar {
+  float: right;
+  padding: 0 0 0 16px;
+}
+
+.coin-drawer-card .card-drawer-description {
+  padding-bottom: 0;
+}
