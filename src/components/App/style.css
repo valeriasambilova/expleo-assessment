@@ -1,0 +1,20 @@
+#root,
+.app--height {
+  height: 100%;
+}
+
+.app--background {
+  background: #fff;
+}
+
+.app-header {
+  padding: 0 16px;
+}
+
+.app-content {
+  padding: 24px;
+}
+
+.app-content--container {
+  margin: 24px 16px;
+}

@@ -1,0 +1,7 @@
+.coins-list--height {
+  height: 100%;
+}
+
+.coins-list {
+  overflow: auto;
+}
