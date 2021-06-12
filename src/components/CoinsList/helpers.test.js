@@ -5,8 +5,8 @@ import {
 
 describe('returns number string with two decimals', () => {
   test.each([
-    ['returns integer number with two decimals', 123, '123.00'],
-    ['returns correct rounded number', 1.005, '1.01'],
+    ['should return integer number with two decimals', 123, '123.00'],
+    ['should return correct rounded number', 1.005, '1.01'],
   ])('%s', (_, input, expected) => {
     const calc = getDecimalNumberWithTwoDecimals(input);
 
@@ -16,10 +16,10 @@ describe('returns number string with two decimals', () => {
 
 describe('converts exponential to decimal', () => {
   test.each([
-    ['returns decimal number 1', 12345, 12345],
-    ['returns decimal number 2', 5.02041e12, 5020410000000],
+    ['should handle simple integer numbers', 12345, 12345],
+    ['should return big numbers in decimal view', 5.02041e12, 5020410000000],
     [
-      'returns a string representing number in decimal view',
+      'should return a string representing decimal view of a very small numbers received in exponential view',
       1e-8,
       '0.00000001',
     ],
