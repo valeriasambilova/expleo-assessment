@@ -4,7 +4,7 @@ import { List, Spin, Avatar, Descriptions } from 'antd';
 
 import coingecko from '../../api/coingecko';
 import {
-  getNumberWithTwoDecimals,
+  getDecimalNumberWithTwoDecimals,
   convertExponentialToDecimal,
 } from './helpers';
 import './style.css';
@@ -52,7 +52,7 @@ const CoinsList = ({ onRowClick = null }) => {
     return `€ ${
       decimalNumber < 1
         ? decimalNumber
-        : getNumberWithTwoDecimals(decimalNumber)
+        : getDecimalNumberWithTwoDecimals(decimalNumber)
     }`;
   };
 
