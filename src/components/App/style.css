@@ -13,6 +13,8 @@
 
 .app-content {
   padding: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .app-content--container {

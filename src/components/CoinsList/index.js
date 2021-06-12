@@ -82,7 +82,6 @@ const CoinsList = ({ onRowClick = null }) => {
     <div className='coins-list coins-list--height'>
       <InfiniteScroll
         className='coins-list--height'
-        initialLoad={false}
         pageStart={1}
         loadMore={(pageToLoad) => setPage(pageToLoad)}
         hasMore={!loading && hasMore}
